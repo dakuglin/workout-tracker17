@@ -1,14 +1,16 @@
-const mongoose = require("mongoose"); //require in mongoose
+const mongoose = require("mongoose"); // require in mongoose
 
 const Schema = mongoose.Schema;
 
 const workoutSchema = new Schema ({
 
+  // day object
   day: {
     type: Date,
     default: Date.now
   },
-  exercise: [
+  // exercise array of objects 
+  exercises: [
     {
       name: {
         type: String,

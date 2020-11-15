@@ -5,10 +5,10 @@ const PORT = process.env.PORT || 3000 //port 3000 local host and heroku deployme
 
 const app = express();
 
-//parse application body
-app.use(express.urlencoded({ extended: true }));
-app.use(express.json());
+// sets up express app to handle data parsing
 app.use(express.static("public"));
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
 mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/workout", {
   useNewUrlParser: true,
@@ -16,10 +16,10 @@ mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/workout", {
 });
 
 // routes
-app.use(require("./routes/api.js"));
-app.use(require("./routes/html.js"));
-
+app.use(require("./routes/apiRoutes.js"));
+app.use(require("./routes/htmlRoutes.js"));
 
 app.listen(PORT, () => {
   console.log(`App running on port ${PORT}!`);
 });
+
