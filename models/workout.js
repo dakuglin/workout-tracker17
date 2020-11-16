@@ -35,8 +35,7 @@ const workoutSchema = new Schema ({
         required: "Please enter duration of workout (min)"
       },
     }
-  ]
-  
+  ] 
 });
 
 

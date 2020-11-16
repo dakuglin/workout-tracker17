@@ -3,8 +3,6 @@ const Workout = require("../models/workout.js"); //require in workout.js
 
 // this get request is used with the api.js
 // the async function getLastWorkout() takes the last workout and displays the data
-// module.exports = function*(app) {
-
 router.get("/api/workouts", function(req, res) {
   Workout.find({})
   .then(dbWorkout => {
@@ -16,57 +14,62 @@ router.get("/api/workouts", function(req, res) {
   });
 });
   
-// router.get("/api/workouts/range", function(req, res) {
-//   Workout.find({})
-//   .then(dbWorkout => {
-//     console.log(dbWorkoug);
-//     res.json(dbWorkout);
-//   })
-//   .catch(err => {
-//     res.status(400).json(err)
-//   })
-// }) 
-
-//addExercise()
-// router.put("/api/workouts/:id", ({ body }, res) => {
-//   Workout.create(
-//     {
-//       _id: mongojs.ObjectId(req.params.id)
-//     }, 
-//     body
-//   )
-//     .then(dbWorkout => {
-//       res.json(dbWorkout);
-//     })
-//     .catch(err => {
-//       res.status(400).json(err);
-//     });
-// });
-  
+// this get request is used with the api.js
+// the async function getWorkoutsInRange() takes all the workout data in the database and plots it with the stats.js file/stats.html
+router.get("/api/workouts/range", function(req, res) {
+  Workout.find({})
+  .then(dbWorkout => {
+   // console.log(dbWorkout);
+    res.json(dbWorkout);
+  })
+  .catch(err => {
+    res.status(400).json(err);
+  });
+});
+ 
 // this post request is used with the api.js
-// the async function createWorkout()
-  
-
+// the async function createWorkout() will create a new workout in the database
 router.post("/api/workouts", (req, res) => {
+  var newExercise = req.body
+  console.log(newExercise)
+
   Workout.create(
-    {
-      type: "workout"
-    }
+   req.body
   )
   .then(dbWorkout => {
     console.log(dbWorkout);
-    res.json(dbWorkout);
+    //var obj = JSON.parse(dbWorkout)
+    //console.log(obj)
+    res.json(dbWorkout)
+    //res.json(obj);
   })
   .catch(err => {
     res.status(400).json(err)
   });
 });
 
-  // router.delete("/api/workouts", ())
 
+// this put request is used with the api.js
+// the async function addExercise() will add a new exercise to the database
+router.put("/api/workouts/:id", (req, res) => {
+  Workout.update(req.params.id, { $push: { exercises: req.body } }, { new: true })
+    .then(dbWorkout => {
+      res.json(dbWorkout);
+    })
+    .catch(err => {
+      res.status(400).json(err);
+    });
+});
 
-
+router.delete("/api/workouts", function(req, res) {
+  Workout.findByIdAndDelete(req.body.id)
+  .then(dbWorkout => {
+    res.json(dbWorkout);
+  })
+  .catch(err => {
+    res.status(400).json(err);
+  })
+});
 
 module.exports = router;
 
-// post, put, get, get, delete

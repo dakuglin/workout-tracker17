@@ -5,7 +5,9 @@
 
 ## Description 
 
+This application uses mongodb and mongoose to store workout information. When the user loads the page, they can create a new workout, or continue a previous workout. In addition, the user can view all of the stats of their previous workout data. 
 
+This application is deployed with MongoDB database to Heroku. 
 
 
 ## Table of Contents 
@@ -16,6 +18,7 @@
 * [Credits](#credits)
 * [License](#license)
 * [Questions](#questions)
+* [Heroku](#heroku)
 
 
 ## Video
@@ -54,3 +57,7 @@ GitHub Username: dakuglin
 GitHub Profile: (https://github.com/dakuglin)
 
 Please email me with additional questions at dakuglin@gmail.com  
+
+## Heroku
+
+The link the the doployed aplication on Heroku can be found at ()
