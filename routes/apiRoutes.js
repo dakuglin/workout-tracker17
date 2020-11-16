@@ -6,7 +6,7 @@ const Workout = require("../models/workout.js"); //require in workout.js
 router.get("/api/workouts", function(req, res) {
   Workout.find({})
   .then(dbWorkout => {
-    console.log(dbWorkout);
+    //console.log(dbWorkout);
     res.json(dbWorkout);
   })
   .catch(err => {
@@ -17,7 +17,7 @@ router.get("/api/workouts", function(req, res) {
 // this get request is used with the api.js
 // the async function getWorkoutsInRange() takes all the workout data in the database and plots it with the stats.js file/stats.html
 router.get("/api/workouts/range", function(req, res) {
-  Workout.find({})
+  Workout.find({}).limit(7)
   .then(dbWorkout => {
    // console.log(dbWorkout);
     res.json(dbWorkout);
@@ -34,14 +34,11 @@ router.post("/api/workouts", (req, res) => {
   console.log(newExercise)
 
   Workout.create(
-   req.body
+   {}//req.body
   )
   .then(dbWorkout => {
     console.log(dbWorkout);
-    //var obj = JSON.parse(dbWorkout)
-    //console.log(obj)
     res.json(dbWorkout)
-    //res.json(obj);
   })
   .catch(err => {
     res.status(400).json(err)
@@ -52,7 +49,7 @@ router.post("/api/workouts", (req, res) => {
 // this put request is used with the api.js
 // the async function addExercise() will add a new exercise to the database
 router.put("/api/workouts/:id", (req, res) => {
-  Workout.update(req.params.id, { $push: { exercises: req.body } }, { new: true })
+  Workout.findByIdAndUpdate(req.params.id, { $push: { exercises: req.body } }, { new: true, runValidators: true })
     .then(dbWorkout => {
       res.json(dbWorkout);
     })
@@ -61,10 +58,11 @@ router.put("/api/workouts/:id", (req, res) => {
     });
 });
 
+
 router.delete("/api/workouts", function(req, res) {
   Workout.findByIdAndDelete(req.body.id)
-  .then(dbWorkout => {
-    res.json(dbWorkout);
+  .then(() => { 
+    res.json(true);
   })
   .catch(err => {
     res.status(400).json(err);
