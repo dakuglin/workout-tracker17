@@ -6,7 +6,7 @@ const Workout = require("../models/workout.js"); //require in workout.js
 router.get("/api/workouts", function(req, res) {
   Workout.find({})
   .then(dbWorkout => {
-    //console.log(dbWorkout);
+    console.log(dbWorkout);
     res.json(dbWorkout);
   })
   .catch(err => {
@@ -19,7 +19,7 @@ router.get("/api/workouts", function(req, res) {
 router.get("/api/workouts/range", function(req, res) {
   Workout.find({}).limit(7)
   .then(dbWorkout => {
-   // console.log(dbWorkout);
+    console.log(dbWorkout);
     res.json(dbWorkout);
   })
   .catch(err => {

@@ -53,4 +53,4 @@ Please email me with additional questions at dakuglin@gmail.com
 
 ## Heroku
 
-The link the the deployed application on Heroku can be found at ()
+The link the the deployed application on Heroku can be found at (https://guarded-thicket-20194.herokuapp.com/)
